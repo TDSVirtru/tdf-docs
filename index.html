@@ -1,0 +1,762 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;json--example&quot;,&quot;json--schema&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="json--example">json--example</a>
+              <a href="#" data-language-name="json--schema">json--schema</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#elevator-pitch" class="toc-h1 toc-link" data-title="Elevator Pitch">Elevator Pitch</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#tdf3-is" class="toc-h2 toc-link" data-title="TDF3 is...">TDF3 is...</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#schemas" class="toc-h1 toc-link" data-title="Schemas">Schemas</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#manifest-json" class="toc-h2 toc-link" data-title="manifest.json">manifest.json</a>
+                  </li>
+                  <li>
+                    <a href="#keyaccessobject-2" class="toc-h2 toc-link" data-title="keyAccessObject">keyAccessObject</a>
+                  </li>
+                  <li>
+                    <a href="#policy-object" class="toc-h2 toc-link" data-title="Policy Object">Policy Object</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='elevator-pitch'>Elevator Pitch</h1><h3 id='tdf3-is'>TDF3 is...</h3>
+<p><strong>For</strong> SMBs and Enterprises </p>
+
+<p><strong>Who</strong> want to protect their files </p>
+
+<p><strong>The</strong> TDF3 architecture  </p>
+
+<p><strong>Is</strong> a backwards compatible set of specifications, and libraries</p>
+
+<p><strong>That</strong> allows for advanced data protection and granular access control</p>
+
+<p><strong>Unlike</strong> TDF2, TDF3 allows for offline create, streaming large files, and multi-party data ownership. It will also be open-source.</p>
+<h1 id='schemas'>Schemas</h1><h2 id='manifest-json'>manifest.json</h2><h3 id='summary'>Summary</h3>
+<p>TODO: Write a summary of what the manifest json is here.</p>
+<pre class="highlight json tab-json--example"><code><span class="err">//</span><span class="w"> </span><span class="err">Example</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reference"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.payload"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zip"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"isEncrypted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"encryptionInformation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"keyAccess"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"remoteWrapped"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http:</span><span class="se">\/\/</span><span class="s2">kas.gsk.com:5000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kas"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"wrappedKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OqnOETpwyGE3PVpUpwwWZoJTNW24UMhnXIif0mSnqLVCUPKAAhrjeue11uAXWpb9sD7ZDsmrc9ylmnSKP9vWel8ST68tv6PeVO+CPYUND7cqG2NhUHCLv5Ouys3Klurykvy8</span><span class="se">\/</span><span class="s2">O3cCLDYl6RDISosxFKqnd7LYD7VnxsYqUns4AW5</span><span class="se">\/</span><span class="s2">odXJrwIhNO3szZV0JgoBXs+U9bul4tSGNxmYuPOj0RE0HEX5yF5lWlt2vHNCqPlmSBV6+jePf7tOBBsqDq35GxCSHhFZhqCgA3MvnBLmKzVPArtJ1lqg3WUdnWV+o6BUzhDpOIyXzeKn4cK2mCxOXGMP2ck2C1a0sECyB82uw=="</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"policyBinding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BzmgoIxZzMmIF42qzbdD4Rw30GtdaRSQL2Xlfms1OPs="</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"encryptedMetadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZoJTNW24UMhnXIif0mSnqLVCU="</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"algorithm"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aes-256-gcm"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"streamable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"iv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"S5FtOSsesp3VfzfNHcHQpg=="</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"integrityInformation"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"hashes"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"policy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJib2R5IjogeyJkYXRhQXR0cmlidXRlcyI6IFt7InVybCI6ICJodHRwczovL2V4YW1wbGUuY29tL2F0dHIvQ2xhc3NpZmljYXRpb24uUyIsICJuYW1lIjogIlRvcCBTZWNyZXQifSwgeyJ1cmwiOiAiaHR0cHM6Ly9leGFtcGxlLmNvbS9hdHRyL0NPSS5QUlgiLCAibmFtZSI6ICJQcm9qZWN0IFgifV19fQ=="</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><pre class="highlight json tab-json--schema"><code><span class="err">//</span><span class="w"> </span><span class="err">Full</span><span class="w"> </span><span class="err">JSON-Schema</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"$id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://virtru.com/schemas/tdf.json"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://json-schema.org/draft-07/schema#"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TDF Manifest"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A manifest file containing data about the TDF."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"payload"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"encryptionInformation"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+      </span><span class="s2">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/payload"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"encryptionInformation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/encryptionInformation"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"maxProperties"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"definitions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Contains metadata for the TDF's payload"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TODO: Will can you fill this in?"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TODO: Will can you fill this in?"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TODO: Will can you fill this in?"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"isEncrypted"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boolean designating whether or not the payload is encrypted"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"encryptionInformation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Top level element for holding information related to the encryption of an assertion or payload. Also contains information about how to derive a key. "</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information describing the encryption scheme."</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"split"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"shamir"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"keyAccess"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TODO: Will can you fill this in?"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"items"</span><span class="p">:{</span><span class="w">
+            </span><span class="s2">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://virtru.com/schemas/key-access-object.json"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Object describing the encryption method"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"streamable"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The type of method used for encryption. Chunked vs. a single chunk payload"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"algorithm"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The encryption algorithm used to encrypt the payload"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"aes-256-gcm"</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"iv"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Base64 intialization vector"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"algorithm"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"iv"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"integrityInformation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Object contaiting information required to validate payload integrity. "</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"hashes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hashes for the individual chunks of the payload in the event the payload was built using a streaming/chunked approach"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A base64 encoded version of the policy object. The policy object is defined here:: https://virtru.com/schemas/tdf-policy-object.json"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='payload'>payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payload</td>
+<td>Object</td>
+<td>Contains metadata for the TDF&#39;s payload. Including type, url, protocol and isEncrypted. TODO: FILL IN MORE HERE</td>
+</tr>
+<tr>
+<td>payload.type</td>
+<td>String</td>
+<td>TODO: Still need to figure out what this is</td>
+</tr>
+<tr>
+<td>payload.url</td>
+<td>String</td>
+<td>What is the name of the protocol file in the TDF.</td>
+</tr>
+<tr>
+<td>payload.protocol</td>
+<td>String</td>
+<td>Designates whidch protocol was used. Currently, only ZIP is supported.</td>
+</tr>
+<tr>
+<td>payload.isEncrypted</td>
+<td>Boolean</td>
+<td>Designates whether or not the payload is encrypted</td>
+</tr>
+</tbody></table>
+<h3 id='encryptioninformation'>encryptionInformation</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>encryptionInformation</td>
+<td>Object</td>
+<td>Contains information describing the method of encryption. As well as information about one or more KASes which own the TDF.</td>
+</tr>
+<tr>
+<td>encryptionInformation.type</td>
+<td>String</td>
+<td>The type of scheme used for accessing keys, and providing authorization to the payload. The schema supports multiple options, but currently the only option supported by our libraries is <code>split</code>.</td>
+</tr>
+<tr>
+<td>encryptionInformation.keyAccess</td>
+<td>Array</td>
+<td>An array of keyAccess Objects. Defined in the next section below.</td>
+</tr>
+<tr>
+<td>encryptionInformation.method</td>
+<td>Object</td>
+<td>An object which describes the information required to actually decrypt the payload once the key is retrieved. Includes the algorithm, and iv at a minimum.</td>
+</tr>
+<tr>
+<td>encryptionInformation.method.algorithm</td>
+<td>String</td>
+<td>The algorithm used for encryption. ie. <code>aes-256-gcm</code></td>
+</tr>
+<tr>
+<td>encryptionInformation.method.isStreamable</td>
+<td>boolean</td>
+<td>isStreamable designates whether or not a TDF payload is streamable. If it&#39;s streamable, the payload is broken into chunks, and indivdual hashes are generated per chunk to establish integrity of the individual chunks.</td>
+</tr>
+<tr>
+<td>encryptionInformation.method.iv</td>
+<td>String</td>
+<td>The initialization vector for the encrypted payload.</td>
+</tr>
+</tbody></table>
+<h3 id='keyaccessobject'>keyAccessObject</h3>
+<p>The keyAccessObject is defined in its own section <a href="#keyaccessobject-2">below</a>.</p>
+<h3 id='integrityinformation'>integrityInformation</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>integrityInformation</td>
+<td>Object</td>
+<td>An object which allows an application to validate the integrity of the payload. Or a chunk of a payload should it be a streamable TDF.</td>
+</tr>
+<tr>
+<td>integrityInformation.hashes</td>
+<td>Array</td>
+<td>An array of hashes TODO: Will can you fill this in? Zack asked specifically about how the hash is generated.</td>
+</tr>
+</tbody></table>
+<h3 id='policy'>policy</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>policy</td>
+<td>String</td>
+<td>The policy object which has been JSON stringified, then base64 encoded. The policy object is described in the next section.</td>
+</tr>
+</tbody></table>
+<h2 id='keyaccessobject-2'>keyAccessObject</h2><h3 id='summary-2'>Summary</h3>
+<p>A summary of the key access object</p>
+<pre class="highlight json tab-json--example"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"remoteWrapped"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http:</span><span class="se">\/\/</span><span class="s2">kas.gsk.com:5000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kas"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"wrappedKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OqnOETpwyGE3PVpUpwwWZoJTNW24UMhnXIif0mSnqLVCUPKAAhrjeue11uAXWpb9sD7ZDsmrc9ylmnSKP9vWel8ST68tv6PeVO+CPYUND7cqG2NhUHCLv5Ouys3Klurykvy8</span><span class="se">\/</span><span class="s2">O3cCLDYl6RDISosxFKqnd7LYD7VnxsYqUns4AW5</span><span class="se">\/</span><span class="s2">odXJrwIhNO3szZV0JgoBXs+U9bul4tSGNxmYuPOj0RE0HEX5yF5lWlt2vHNCqPlmSBV6+jePf7tOBBsqDq35GxCSHhFZhqCgA3MvnBLmKzVPArtJ1lqg3WUdnWV+o6BUzhDpOIyXzeKn4cK2mCxOXGMP2ck2C1a0sECyB82uw=="</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"policyBinding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BzmgoIxZzMmIF42qzbdD4Rw30GtdaRSQL2Xlfms1OPs="</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"encryptedMetadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZoJTNW24UMhnXIif0mSnqLVCU="</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre><pre class="highlight json tab-json--schema"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"$id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://virtru.com/schemas/tdf.json"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://json-schema.org/draft-07/schema#"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Key access object"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TODO: Will can you fill this in?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"wrappedKey"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"policyBinding"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"metadataKek"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"encryptedMetadata"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TODO: Will can you fill this in?"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"remoteWrapped"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL pointing to the KAS"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">kas.gsk.com:5000"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Protocol being used for this split."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"kas"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"wrappedKey"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The base64 wrapped key used to encrypt the payload"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"policyBinding"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Base64 Signature of the policy. Signed using the public key of the KAS."</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"encryptedMetadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metadata for the policy which has been encrypted, then base64 encoded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"R5IjogeyJkY=="</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>keyAccessObject</td>
+<td>Object</td>
+<td>TODO: Fill this in</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>TODO: Will, what are some other options here?</td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>A url pointing to the KAS</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>String</td>
+<td>Protocol being used. Currently only KAS is supported</td>
+</tr>
+<tr>
+<td>wrappedKey</td>
+<td>String</td>
+<td>The symetric key used to encrypt the payload. It has been encrypted using the public key of the KAS, then base64 encoded.</td>
+</tr>
+<tr>
+<td>policyBinding</td>
+<td>String</td>
+<td>TODO: Can you fill this in</td>
+</tr>
+<tr>
+<td>encryptedMetadata</td>
+<td>String</td>
+<td>Metadata associated with the TDF, and the request. The contents of the metadata are freeform, and are used to pass information from the client, and any plugins that may be in use by the KAS. For example, in Virtru&#39;s scenario, we could include information about things like, watermarking, expiration, and also data about the request. Things like clientString, could also be placed here.</td>
+</tr>
+</tbody></table>
+<h2 id='policy-object'>Policy Object</h2><h3 id='summary-3'>Summary</h3>
+<p>The policy object is an object generated by the client at the time of the payload&#39;s encryption. It contains information required for the KAS to make an access decision, such as, <code>dataAttributes</code>, and <code>dissem</code>. The policyObject is stored in the manifest.json for a TDF, and sent to the KAS along with an entity object so that the KAS may make an access decision. </p>
+
+<p>A KAS, by default, is stateless, but by using plugins, may sync the policy data received from an access request using a datastore of its choice. It&#39;s up to the developer of a plugin to determine how that data is stored in their store, but it&#39;s recommended they choose something like outlined in the schema so as to simply the adapter logic in the plugin.</p>
+<pre class="highlight json tab-json--schema"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"$id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://virtru.com/schemas/policy.json"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://json-schema.org/draft-07/schema#"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TDF Policy object"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Policy for the TDF. Includes attributes, and encrypted metadata for the KAS"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"required"</span><span class="p">:[</span><span class="w">
+    </span><span class="s2">"uuid"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A UUID for the policy, generated by the client which created the TDF"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"630086f5-f238-4cd1-897c-0a7bd4da6f66"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TODDO: Fill this in"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"dataAttributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Attributes associated with the policy. Used by KAS to make access decisions"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An attribute object"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A url pointing to an attribute's policy"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"examples"</span><span class="p">:[</span><span class="w">
+                  </span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">example.com</span><span class="se">\/</span><span class="s2">attr</span><span class="se">\/</span><span class="s2">Classification.TS"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The name of the attribute"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"examples"</span><span class="p">:[</span><span class="w">
+                  </span><span class="s2">"Top Secret"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"dataAttributes"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"dissem"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An array of userIds to be given access to the TDF content"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A userID, most likely an email"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"johndoe@virtru.com"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><pre class="highlight json tab-json--example"><code><span class="p">{</span><span class="w">
+</span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111-2222-33333-44444-abddef-timestamp"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"dataAttributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">example.com</span><span class="se">\/</span><span class="s2">attr</span><span class="se">\/</span><span class="s2">Classification.S"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Top Secret"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">example.com</span><span class="se">\/</span><span class="s2">attr</span><span class="se">\/</span><span class="s2">COI.PRX"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project X"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"dissem"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"user-id@domain.com"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='uuid'>uuid</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>String</td>
+<td>A unique UUID for the TDF&#39;s policy.</td>
+</tr>
+</tbody></table>
+<h3 id='body'>body</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>body</td>
+<td>Object</td>
+<td>Object which contains information about the policy required for the KAS to make an access decision.</td>
+</tr>
+<tr>
+<td>body.dataAttributes</td>
+<td>Array</td>
+<td>An array of dataAttributes. dataAttributes are defined in the next sub-section.</td>
+</tr>
+<tr>
+<td>body.dissem</td>
+<td>Array</td>
+<td>An array of unique userIds. It&#39;s used to explicitly list users/entities that should be given access to the payload.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="json--example">json--example</a>
+                <a href="#" data-language-name="json--schema">json--schema</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

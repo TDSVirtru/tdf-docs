@@ -250,7 +250,7 @@
 These docs, and the schemas they define are very much a work in progress and are subject to change without notice.
 </aside>
 <h1 id='schemas'>Schemas</h1><h2 id='manifest-json'>manifest.json</h2><h3 id='summary'>Summary</h3>
-<p>TODO: Write a summary of what the manifest json is here.</p>
+<p>A TDF&#39;s manifest holds all the information a client would need to decrypt the file. It describes the location of the payload, the method used to encrypt it, information to verify its authenticity, the KASes a client must make requests to in order to get an unrapped key, etc. It also contains the TDF&#39;s policy which describes who, or what should be given access to the content. </p>
 <pre class="highlight json tab-json--example"><code><span class="err">//</span><span class="w"> </span><span class="err">Example</span><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -454,22 +454,22 @@ These docs, and the schemas they define are very much a work in progress and are
 <tr>
 <td>payload</td>
 <td>Object</td>
-<td>Contains metadata for the TDF&#39;s payload. Including type, url, protocol and isEncrypted. TODO: FILL IN MORE HERE</td>
+<td>Contains metadata for the TDF&#39;s payload. Including type, url, protocol and isEncrypted.</td>
 </tr>
 <tr>
 <td>payload.type</td>
 <td>String</td>
-<td>TODO: Still need to figure out what this is</td>
+<td>Type of payload. The type would describe where to get the payload. Is it contained within the TDF, for example, or stored on a remote server.</td>
 </tr>
 <tr>
 <td>payload.url</td>
 <td>String</td>
-<td>What is the name of the protocol file in the TDF.</td>
+<td>A url pointing to the location of the payload</td>
 </tr>
 <tr>
 <td>payload.protocol</td>
 <td>String</td>
-<td>Designates whidch protocol was used. Currently, only ZIP is supported.</td>
+<td>Designates which protocol was used. Currently, only ZIP is supported.</td>
 </tr>
 <tr>
 <td>payload.isEncrypted</td>
@@ -537,9 +537,49 @@ These docs, and the schemas they define are very much a work in progress and are
 <td>An object which allows an application to validate the integrity of the payload. Or a chunk of a payload should it be a streamable TDF.</td>
 </tr>
 <tr>
-<td>integrityInformation.hashes</td>
+<td>integrityInformation.rootSignature</td>
+<td>Object</td>
+<td>Object containing a signature for the entire payload, and the algorithm used to generate it.</td>
+</tr>
+<tr>
+<td>integrityInformation.rootSignature.alg</td>
+<td>String</td>
+<td>The algorithm used to generate the root signature</td>
+</tr>
+<tr>
+<td>integrityInformation.rootSignature.sig</td>
+<td>String</td>
+<td>The signature for the entire payload. <br><br> <code>Base64.encode(HMAC(payload, payloadKey))</code></td>
+</tr>
+<tr>
+<td>integrityInformation.segmentSizeDefault</td>
+<td>String</td>
+<td>The default size of each chunk, or segment in bytes. By setting the default size here, the segments array becomes more space efficient as it will not have to specify the segment size each time.</td>
+</tr>
+<tr>
+<td>integrityInformation.segmentHashAlg</td>
+<td>String</td>
+<td>The hasing algorithm used to generate the hashes for each segment.</td>
+</tr>
+<tr>
+<td>integrityInformation.segments</td>
 <td>Array</td>
-<td>An array of hashes TODO: Will can you fill this in? Zack asked specifically about how the hash is generated.</td>
+<td>An array of objects containing each segment hash info.</td>
+</tr>
+<tr>
+<td>integrityInformation.segments item</td>
+<td>Object</td>
+<td>Object containing integrity information about a segment of the payload.</td>
+</tr>
+<tr>
+<td>integrityInformation.segments segment.hash</td>
+<td>String</td>
+<td>A hash generated using the specified &#39;segmentHashAlg&#39;. <code>Base64.encode(HMAC(segment, payloadKey))</code></td>
+</tr>
+<tr>
+<td>integrityInformation.segments segment.segmentSize</td>
+<td>String</td>
+<td>The size of the segment. This field is optional. The size of the segment is inferred from &#39;segmentSizeDefault&#39; defined above, but in the event that a segment were modified and re-encrypted, the segment size would change.</td>
 </tr>
 </tbody></table>
 <h3 id='policy'>policy</h3>
@@ -570,7 +610,7 @@ These docs, and the schemas they define are very much a work in progress and are
     </span><span class="s2">"encryptedMetadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZoJTNW24UMhnXIif0mSnqLVCU="</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre><pre class="highlight json tab-json--schema"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"$id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://virtru.com/schemas/tdf.json"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"$id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://virtru.com/schemas/key-access-object.json"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://json-schema.org/draft-07/schema#"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Key access object"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KeyAccess object stores all information about how an object key OR key split is stored, and if / how it has been encrypted (eg with KEK or pub wrapping key)"</span><span class="p">,</span><span class="w">
@@ -587,9 +627,11 @@ These docs, and the schemas they define are very much a work in progress and are
   </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TODO: Will can you fill this in?"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Specifies how the key is stored."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"remoteWrapped"</span><span class="w">
+        </span><span class="s2">"remote"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"remoteWrapped"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"wrapped"</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -615,22 +657,23 @@ These docs, and the schemas they define are very much a work in progress and are
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Base64 Signature of the policy. Signed using the public key of the KAS."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"alg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The algorithm used to generate the hash"",
-        },
-        "</span><span class="err">hash</span><span class="s2">": {
-          "</span><span class="err">description</span><span class="s2">": "</span><span class="err">Base</span><span class="mi">64</span><span class="w"> </span><span class="err">string</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">generated</span><span class="w"> </span><span class="err">hash</span><span class="s2">"
-        }
-      }
-    },
-    "</span><span class="err">encryptedMetadata</span><span class="s2">": {
-      "</span><span class="err">type</span><span class="s2">": "</span><span class="err">string</span><span class="s2">",
-      "</span><span class="err">description</span><span class="s2">": "</span><span class="err">Metadata</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">policy</span><span class="w"> </span><span class="err">which</span><span class="w"> </span><span class="err">has</span><span class="w"> </span><span class="err">been</span><span class="w"> </span><span class="err">encrypted</span><span class="p">,</span><span class="w"> </span><span class="err">then</span><span class="w"> </span><span class="err">base</span><span class="mi">64</span><span class="w"> </span><span class="err">encoded</span><span class="s2">",
-      "</span><span class="err">examples</span><span class="s2">": [
-        "</span><span class="err">R</span><span class="mi">5</span><span class="err">IjogeyJkY==</span><span class="s2">"
-      ]
-    }
-  }
-}
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The algorithm used to generate the hash"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Base64 string of the generated hash"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"encryptedMetadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Metadata for the policy which has been encrypted, then base64 encoded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"R5IjogeyJkY=="</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
 
 </span></code></pre>
 <table><thead>

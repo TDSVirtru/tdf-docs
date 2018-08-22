@@ -23,7 +23,8 @@ These docs, and the schemas they define are very much a work in progress and are
 ## manifest.json
 
 ### Summary
-TODO: Write a summary of what the manifest json is here.
+
+A TDF's manifest holds all the information a client would need to decrypt the file. It describes the location of the payload, the method used to encrypt it, information to verify its authenticity, the KASes a client must make requests to in order to get an unrapped key, etc. It also contains the TDF's policy which describes who, or what should be given access to the content. 
 
 ```json--example
 // Example
@@ -222,13 +223,14 @@ TODO: Write a summary of what the manifest json is here.
   }
 }
 ```
+
 ### payload
 Parameter | Type | Description
 --------- | -- | -----------
-payload | Object |Contains metadata for the TDF's payload. Including type, url, protocol and isEncrypted. TODO: FILL IN MORE HERE
-payload.type | String | TODO: Still need to figure out what this is
-payload.url | String |  What is the name of the protocol file in the TDF.
-payload.protocol | String |  Designates whidch protocol was used. Currently, only ZIP is supported.
+payload | Object | Contains metadata for the TDF's payload. Including type, url, protocol and isEncrypted.
+payload.type | String | Type of payload. The type would describe where to get the payload. Is it contained within the TDF, for example, or stored on a remote server. 
+payload.url | String |  A url pointing to the location of the payload
+payload.protocol | String |  Designates which protocol was used. Currently, only ZIP is supported.
 payload.isEncrypted | Boolean |  Designates whether or not the payload is encrypted
 
 ### encryptionInformation
@@ -250,7 +252,16 @@ The keyAccessObject is defined in its own section [below](#keyaccessobject-2).
 Parameter | Type | Description
 --------- | -- | -----------
 integrityInformation | Object | An object which allows an application to validate the integrity of the payload. Or a chunk of a payload should it be a streamable TDF.
-integrityInformation.hashes | Array | An array of hashes TODO: Will can you fill this in? Zack asked specifically about how the hash is generated.
+integrityInformation.rootSignature | Object | Object containing a signature for the entire payload, and the algorithm used to generate it.
+integrityInformation.rootSignature.alg | String | The algorithm used to generate the root signature
+integrityInformation.rootSignature.sig | String | The signature for the entire payload. <br><br> `Base64.encode(HMAC(payload, payloadKey))`
+integrityInformation.segmentSizeDefault | String | The default size of each chunk, or segment in bytes. By setting the default size here, the segments array becomes more space efficient as it will not have to specify the segment size each time.
+integrityInformation.segmentHashAlg | String | The hasing algorithm used to generate the hashes for each segment.
+integrityInformation.segments | Array | An array of objects containing each segment hash info.
+integrityInformation.segments item | Object | Object containing integrity information about a segment of the payload.
+integrityInformation.segments segment.hash | String | A hash generated using the specified 'segmentHashAlg'. `Base64.encode(HMAC(segment, payloadKey))`
+integrityInformation.segments segment.segmentSize | String | The size of the segment. This field is optional. The size of the segment is inferred from 'segmentSizeDefault' defined above, but in the event that a segment were modified and re-encrypted, the segment size would change.
+
 
 ### policy
 Parameter | Type | Description
@@ -278,7 +289,7 @@ A summary of the key access object
 
 ```json--schema 
 {
-  "$id": "https://virtru.com/schemas/tdf.json",
+  "$id": "https://virtru.com/schemas/key-access-object.json",
   "$schema": "https://json-schema.org/draft-07/schema#",
   "title": "Key access object",
   "description": "KeyAccess object stores all information about how an object key OR key split is stored, and if / how it has been encrypted (eg with KEK or pub wrapping key)",
@@ -295,9 +306,11 @@ A summary of the key access object
   "properties": {
     "type": {
       "type": "string",
-      "description": "TODO: Will can you fill this in?",
+      "description": "Specifies how the key is stored.",
       "examples": [
-        "remoteWrapped"
+        "remote",
+        "remoteWrapped",
+        "wrapped"
       ]
     },
     "url": {
@@ -323,7 +336,7 @@ A summary of the key access object
       "description": "Base64 Signature of the policy. Signed using the public key of the KAS.",
       "properties": {
         "alg": {
-          "description": "The algorithm used to generate the hash"",
+          "description": "The algorithm used to generate the hash",
         },
         "hash": {
           "description": "Base64 string of the generated hash"
@@ -339,6 +352,7 @@ A summary of the key access object
     }
   }
 }
+
 
 ```
 

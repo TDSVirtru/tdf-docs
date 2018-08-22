@@ -18,21 +18,6 @@ search: true
 These docs, and the schemas they define are very much a work in progress and are subject to change without notice.
 </aside>
 
-# Elevator Pitch
-### TDF3 is...
-
-**For** SMBs and Enterprises 
-
-**Who** want to protect their files 
-
-**The** TDF3 architecture  
-
-**Is** a backwards compatible set of specifications, and libraries
-
-**That** allows for advanced data protection and granular access control
-
-**Unlike** TDF2, TDF3 allows for offline create, streaming large files, and multi-party data ownership. It will also be open-source.
-
 # Schemas
 
 ## manifest.json
@@ -53,7 +38,7 @@ TODO: Write a summary of what the manifest json is here.
     "type": "split",
     "keyAccess": [
       {
-        "type": "remoteWrapped",
+        "type": "wrapped",
         "url": "http:\/\/kas.gsk.com:5000",
         "protocol": "kas",
         "wrappedKey": "OqnOETpwyGE3PVpUpwwWZoJTNW24UMhnXIif0mSnqLVCUPKAAhrjeue11uAXWpb9sD7ZDsmrc9ylmnSKP9vWel8ST68tv6PeVO+CPYUND7cqG2NhUHCLv5Ouys3Klurykvy8\/O3cCLDYl6RDISosxFKqnd7LYD7VnxsYqUns4AW5\/odXJrwIhNO3szZV0JgoBXs+U9bul4tSGNxmYuPOj0RE0HEX5yF5lWlt2vHNCqPlmSBV6+jePf7tOBBsqDq35GxCSHhFZhqCgA3MvnBLmKzVPArtJ1lqg3WUdnWV+o6BUzhDpOIyXzeKn4cK2mCxOXGMP2ck2C1a0sECyB82uw==",
@@ -63,11 +48,22 @@ TODO: Write a summary of what the manifest json is here.
     ],
     "method": {
       "algorithm": "aes-256-gcm",
-      "streamable": false,
-      "iv": "S5FtOSsesp3VfzfNHcHQpg==",
+      "isStreamable": false,
+      "iv": "S5FtOSsesp3VfzfNHcHQpg=="
     },
     "integrityInformation":{
-      "hashes": []
+      "rootSignature": {
+        "alg": "HS256",
+        "sig": "eyJib2...V19fQ=="
+      },
+      "segmentSizeDefault": "1048576",
+      "segmentHashAlg": "HS256",
+      "segments": [
+        {
+          "segmentSize": "1048576",
+          "hash": "eyJape...dq82UR9=="
+        }
+      ]
     },
     "policy": "eyJib2R5IjogeyJkYXRhQXR0cmlidXRlcyI6IFt7InVybCI6ICJodHRwczovL2V4YW1wbGUuY29tL2F0dHIvQ2xhc3NpZmljYXRpb24uUyIsICJuYW1lIjogIlRvcCBTZWNyZXQifSwgeyJ1cmwiOiAiaHR0cHM6Ly9leGFtcGxlLmNvbS9hdHRyL0NPSS5QUlgiLCAibmFtZSI6ICJQcm9qZWN0IFgifV19fQ=="
   }
@@ -97,20 +93,26 @@ TODO: Write a summary of what the manifest json is here.
   "maxProperties": 2,
   "definitions": {
     "payload": {
-      "description": "Contains metadata for the TDF's payload",
+      "description": "Contains metadata for the TDF's paylaod",
       "type": "object",
       "properties": {
         "type": {
-          "description": "TODO: Will can you fill this in?",
-          "type": "string"
+          "description": "Type of payload",
+          "type": "string",
+          "examples": [
+            "reference"
+          ]
         },
         "url": {
-          "description": "TODO: Will can you fill this in?",
+          "description": "URL pointing to the location of the payload.",
           "type": "string"
         },
         "protocol": {
-          "description": "TODO: Will can you fill this in?",
-          "type": "string"
+          "description": "Protocol used for packaging the TDF.",
+          "type": "string",
+          "examples": [
+            "zip"
+          ]
         },
         "isEncrypted": {
           "description": "Boolean designating whether or not the payload is encrypted",
@@ -131,7 +133,7 @@ TODO: Write a summary of what the manifest json is here.
           ]
         },
         "keyAccess": {
-          "description": "TODO: Will can you fill this in?",
+          "description": "Contains information describing the method of encryption. As well as information about one or more KASes which own the TDF.",
           "type": "array",
           "items":{
             "$ref": "https://virtru.com/schemas/key-access-object.json"
@@ -141,7 +143,7 @@ TODO: Write a summary of what the manifest json is here.
           "description": "Object describing the encryption method",
           "type": "object",
           "properties": {
-            "streamable": {
+            "isStreamable": {
               "type": "boolean",
               "description": "The type of method used for encryption. Chunked vs. a single chunk payload"
             },
@@ -164,13 +166,49 @@ TODO: Write a summary of what the manifest json is here.
         },
         "integrityInformation": {
           "type": "object",
-          "description": "Object contaiting information required to validate payload integrity. ",
+          "description": "An object which allows an application to validate the integrity of the payload. Or a chunk of a payload should it be a streamable TDF.",
           "properties": {
-            "hashes": {
+            "rootSignature": {
+              "type": "object",
+              "description": "Object containing a signature for the entire payload, and the algorithm used to generate it.",
+              "properties": {
+                "alg": {
+                  "type": "string",
+                  "description": "The algorithm used to generate the root signature",
+                  "examples": [
+                    "HS256"
+                  ]
+                },
+                "sig": {
+                  "type": "string",
+                  "description": "The signature for the entire payload. Base64.encode(HMAC(payload, payloadKey))"
+                }
+              }
+            },
+            "segmentSizeDefault": {
+              "type": "string",
+              "description": "The default size of each chunk, or segment in bytes. By setting the default size here, the segments array becomes more space efficient as it will not have to specify the segment size each time."
+            },
+            "segmentHashAlg": {
+              "type": "string",
+              "description": "The hasing algorithm used to generate the hashes for each segment."
+            },
+            "segments": {
               "type": "array",
+              "description": "An array of objects containing each segment hash info.",
               "items": {
-                "type": "string",
-                "description": "Hashes for the individual chunks of the payload in the event the payload was built using a streaming/chunked approach"
+                "type": "object",
+                "description": "Object containing integrity information about a segment of the payload.",
+                "properties": {
+                  "hash": {
+                    "type": "string",
+                    "description": "A hash generated using the specified 'segmentHashAlg'. hash = Base64.encode(HMAC(segment, payloadKey))"
+                  },
+                  "segmentSize": {
+                    "type": "string",
+                    "description": "The size of the segment. This field is optional. The size of the segment is inferred from 'segmentSizeDefault' defined above, but in the event that a segment were modified and re-encrypted, the segment size would change."
+                  }
+                }
               }
             }
           }
@@ -226,11 +264,14 @@ A summary of the key access object
 
 ```json--example
   {
-    "type": "remoteWrapped",
+    "type": "wrapped",
     "url": "http:\/\/kas.gsk.com:5000",
     "protocol": "kas",
     "wrappedKey": "OqnOETpwyGE3PVpUpwwWZoJTNW24UMhnXIif0mSnqLVCUPKAAhrjeue11uAXWpb9sD7ZDsmrc9ylmnSKP9vWel8ST68tv6PeVO+CPYUND7cqG2NhUHCLv5Ouys3Klurykvy8\/O3cCLDYl6RDISosxFKqnd7LYD7VnxsYqUns4AW5\/odXJrwIhNO3szZV0JgoBXs+U9bul4tSGNxmYuPOj0RE0HEX5yF5lWlt2vHNCqPlmSBV6+jePf7tOBBsqDq35GxCSHhFZhqCgA3MvnBLmKzVPArtJ1lqg3WUdnWV+o6BUzhDpOIyXzeKn4cK2mCxOXGMP2ck2C1a0sECyB82uw==",
-    "policyBinding": "BzmgoIxZzMmIF42qzbdD4Rw30GtdaRSQL2Xlfms1OPs=",
+    "policyBinding": {
+      "alg": "HS256",
+      "hash": "BzmgoIxZzMmIF42qzbdD4Rw30GtdaRSQL2Xlfms1OPs="
+    },
     "encryptedMetadata": "ZoJTNW24UMhnXIif0mSnqLVCU="
   }
 ```
@@ -240,7 +281,7 @@ A summary of the key access object
   "$id": "https://virtru.com/schemas/tdf.json",
   "$schema": "https://json-schema.org/draft-07/schema#",
   "title": "Key access object",
-  "description": "TODO: Will can you fill this in?",
+  "description": "KeyAccess object stores all information about how an object key OR key split is stored, and if / how it has been encrypted (eg with KEK or pub wrapping key)",
   "type": "object",
   "required": [
     "type",
@@ -278,8 +319,16 @@ A summary of the key access object
       "description": "The base64 wrapped key used to encrypt the payload"
     },
     "policyBinding": {
-      "type": "string",
-      "description": "Base64 Signature of the policy. Signed using the public key of the KAS."
+      "type": "object",
+      "description": "Base64 Signature of the policy. Signed using the public key of the KAS.",
+      "properties": {
+        "alg": {
+          "description": "The algorithm used to generate the hash"",
+        },
+        "hash": {
+          "description": "Base64 string of the generated hash"
+        }
+      }
     },
     "encryptedMetadata": {
       "type": "string",
@@ -295,14 +344,15 @@ A summary of the key access object
 
 Parameter | Type | Description
 --------- | -- | -----------
-keyAccessObject | Object | TODO: Fill this in
-type | String | TODO: Will, what are some other options here?
+keyAccessObject | Object | KeyAccess object stores all information about how an object key OR key split is stored, and if / how it has been encrypted (eg with KEK or pub wrapping key)
+type | String | Specifies how the key is stored. <br> <br> Possible Values: <br> `remote`:  Stored and fetched like a KMS or ACM SAAS) <br>`remoteWrapped` Like our CKS / ACM today <br> `wrapped` Wrapped and embedded key. Default for TDF3.
 url | String | A url pointing to the KAS 
 protocol | String | Protocol being used. Currently only KAS is supported
 wrappedKey | String | The symetric key used to encrypt the payload. It has been encrypted using the public key of the KAS, then base64 encoded.
-policyBinding | String | TODO: Can you fill this in
+policyBinding | Object | Object describing the policyBinding. Contains a hash, and an alg.
+policyBinding.alg | String | The policy binding algorithm used to generate the hash
+policyBinding.hash | String | This contains a KEYED HASH that will provide cryptographic integrity on the policy object, such that it cannot be modified or copied to another TDF, without invalidating the binding.  Specifically, you would have to have access to the key in order to overwrite the policy. <br><br> This is Base64 encoding of HMAC(POLICY,KEY), where: <br><br> **POLICY**: base64(policyjson) that is in the “encryptionInformation/policy” <br> __HMAC__:  HMAC SHA256 (default, but can be specified in the alg field described above) <br> **KEY**:  Whichever Key Split or Key that is available to the KAS (e.g. the underlying AES 256 key in the wrappedKey.
 encryptedMetadata | String | Metadata associated with the TDF, and the request. The contents of the metadata are freeform, and are used to pass information from the client, and any plugins that may be in use by the KAS. For example, in Virtru's scenario, we could include information about things like, watermarking, expiration, and also data about the request. Things like clientString, could also be placed here.
-
 
 ## Policy Object
 

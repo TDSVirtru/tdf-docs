@@ -94,7 +94,7 @@ A TDF's manifest holds all the information a client would need to decrypt the fi
   "maxProperties": 2,
   "definitions": {
     "payload": {
-      "description": "Contains metadata for the TDF's paylaod",
+      "description": "Contains metadata for the TDF's payload",
       "type": "object",
       "properties": {
         "type": {
@@ -156,7 +156,7 @@ A TDF's manifest holds all the information a client would need to decrypt the fi
               ]
             },
             "iv": {
-              "description": "Base64 intialization vector",
+              "description": "Base64 initialization vector",
               "type": "string"
             }
           },
@@ -192,7 +192,7 @@ A TDF's manifest holds all the information a client would need to decrypt the fi
             },
             "segmentHashAlg": {
               "type": "string",
-              "description": "The hasing algorithm used to generate the hashes for each segment."
+              "description": "The hashing algorithm used to generate the hashes for each segment."
             },
             "segments": {
               "type": "array",
@@ -256,7 +256,7 @@ integrityInformation.rootSignature | Object | Object containing a signature for 
 integrityInformation.rootSignature.alg | String | The algorithm used to generate the root signature
 integrityInformation.rootSignature.sig | String | The signature for the entire payload. <br><br> `Base64.encode(HMAC(payload, payloadKey))`
 integrityInformation.segmentSizeDefault | String | The default size of each chunk, or segment in bytes. By setting the default size here, the segments array becomes more space efficient as it will not have to specify the segment size each time.
-integrityInformation.segmentHashAlg | String | The hasing algorithm used to generate the hashes for each segment.
+integrityInformation.segmentHashAlg | String | The hashing algorithm used to generate the hashes for each segment.
 integrityInformation.segments | Array | An array of objects containing each segment hash info.
 integrityInformation.segments item | Object | Object containing integrity information about a segment of the payload.
 integrityInformation.segments segment.hash | String | A hash generated using the specified 'segmentHashAlg'. `Base64.encode(HMAC(segment, payloadKey))`

@@ -336,7 +336,7 @@ A summary of the key access object
       "description": "Base64 Signature of the policy. Signed using the public key of the KAS.",
       "properties": {
         "alg": {
-          "description": "The algorithm used to generate the hash",
+          "description": "The algorithm used to generate the hash"
         },
         "hash": {
           "description": "Base64 string of the generated hash"
